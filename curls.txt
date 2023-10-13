@@ -1,0 +1,14 @@
+// @ts-nocheck
+
+//GET
+curl localhost:8080/api/parking_sessions
+curl localhost:8080/api/parking_sessions?status=ACTIVE
+
+//PUT
+curl -d '{"plate_number":"999888833O5", "status":"COMPLETE"}' -H "Content-Type: application/json" -X PUT http://localhost:8080/api/parking_sessions/3
+curl -d '{"plate_number":"999888833O5", "status":"ACTIVE"}' -H "Content-Type: application/json" -X PUT http://localhost:8080/api/parking_sessions/3
+curl -d '{"plate_number":"777ABBB", "status":"ACTIVE"}' -H "Content-Type: application/json" -X PUT http://localhost:8080/api/parking_sessions/
+curl -H "Content-Type: application/json" -X PUT http://localhost:8080/api/parking_sessions/6 -d '{"plate_number":"1111x1x12", "status":"COMPLETE"}'
+
+//POST
+curl -d '{"plate_number":"LOLOLOLO", "status":"ACTIVE"}' -H "Content-Type: application/json" -X POST http://localhost:8080/api/parking_sessions

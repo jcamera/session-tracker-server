@@ -1,0 +1,16 @@
+
+CREATE TABLE IF NOT EXISTS User (
+	id INTEGER PRIMARY KEY ASC,
+	username TEXT NOT NULL,
+	email TEXT NOT NULL UNIQUE,
+	password TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS ParkingSession (
+	id INTEGER PRIMARY KEY ASC,
+	plate_number TEXT NOT NULL,
+	status TEXT NOT NULL,
+	created_on NUMERIC
+);
+
+
