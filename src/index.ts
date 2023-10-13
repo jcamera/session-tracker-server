@@ -57,3 +57,5 @@ wss.on('connection', (ws: WebSocket) => {
 
 //wss.on('close', handleClose)
 //handle any clean-up here 
+
+export default app; //for testing

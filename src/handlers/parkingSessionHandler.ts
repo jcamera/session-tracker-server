@@ -27,7 +27,7 @@ export async function getParkingSessions (req: Request, res: Response) {
 
 export const createParkingSession = async (req: Request, res: Response) => {
     const { plate_number, status } = req.body;
-    if (!plate_number) {
+    if (!plate_number || !status) {
         res.status(400).json({ message: "missing required fields for new session create"});
         return;
     }
@@ -56,7 +56,7 @@ export const updateParkingSession = async (req: Request, res: Response) => {
     const { plate_number, status } = req.body;
     const { parking_session_id: id } = req.params;
 
-    if (!id) {
+    if (!id || !plate_number || !status) {
         res.status(400).json({ message: "missing required fields for update session"});
         return;
     }
