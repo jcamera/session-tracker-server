@@ -3,8 +3,8 @@ import DB from '../db/db.js';
 
 //when sessions are updated we broadcast message to currently connected clients
 const broadcastMessage = (data: Array<object>) => {
+    console.log('broadcasting data..');
     for (const key in global.wsConnections) {
-        console.log('broadcast message to: ', key);
         const ws = global.wsConnections[key];
         ws.send(JSON.stringify(data));
     }
@@ -12,6 +12,7 @@ const broadcastMessage = (data: Array<object>) => {
 
 export async function getParkingSessions (req: Request, res: Response) {
     const { status: statusFilter} = req.query;
+    console.log(`calling getParkingSessions, status filter ${statusFilter ?? 'none'}`);
 
     try {
         const response = await DB.ParkingSession.getAll(statusFilter as string)
@@ -27,6 +28,8 @@ export async function getParkingSessions (req: Request, res: Response) {
 
 export const createParkingSession = async (req: Request, res: Response) => {
     const { plate_number, status } = req.body;
+    console.log(`calling createParkingSession`, {plate_number, status});
+
     if (!plate_number || !status) {
         res.status(400).json({ message: "missing required fields for new session create"});
         return;
@@ -55,6 +58,8 @@ export const updateParkingSession = async (req: Request, res: Response) => {
 
     const { plate_number, status } = req.body;
     const { parking_session_id: id } = req.params;
+
+    console.log(`calling updateParkingSession`, {id, plate_number, status});
 
     if (!id || !plate_number || !status) {
         res.status(400).json({ message: "missing required fields for update session"});

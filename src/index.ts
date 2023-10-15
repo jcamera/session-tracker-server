@@ -3,10 +3,14 @@ import { WebSocketServer } from 'ws';
 import cors from 'cors';
 //import { getParkingSessions, createParkingSession, updateParkingSession } from './handlers/parkingSessionHandler.js';
 import { uuid } from 'uuidv4';
-import parkingSessionRouter from './routes/parkingSessionRoutes.js';
+import parkingSessionRouter from './routes/parkingSessionRoutes.ts';
+import { login, createUser } from './handlers/userHandler.ts';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
-const PORT = 8080;
+const HTTP_PORT = process.env.HTTP_PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
@@ -18,9 +22,13 @@ app.get('/ping', (req: Request, res: Response) => {
     res.send('pong');
 })
 
+//user routes 
+app.post('/login', login);
+app.post('/register', createUser);
+
 //start http server
-const httpServer = app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+const httpServer = app.listen(HTTP_PORT, () => {
+    console.log(`Server running at http://localhost:${HTTP_PORT}`);
   });
 
 //set up websockets global to track connections 

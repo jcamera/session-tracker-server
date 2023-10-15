@@ -1,7 +1,11 @@
 import express, {Request, Response} from 'express';
 import { getParkingSessions, createParkingSession, updateParkingSession } from '../handlers/parkingSessionHandler.js';
+import { authMiddleware } from '../utils/auth.ts';
 
 const router = express.Router()
+
+/** for local demo leave out */
+//router.use(authMiddleware); //add auth middleware for these routes
 
 router.get('/', getParkingSessions );
 
