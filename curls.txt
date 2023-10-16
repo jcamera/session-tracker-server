@@ -33,3 +33,10 @@ live server
 curl http://34.234.92.182:8080/ping
 curl -d '{"username":"test", "password":"VendPark123", "email": "test@test.com"}' -H "Content-Type: application/json" -X POST http://34.234.92.182:8080/register
 curl -H "Content-Type: application/json" -X PUT http://34.234.92.182:8080/api/parking_sessions/18 -d '{"plate_number":"AGAIN123", "status":"ACTIVE"}'
+
+server call with auth
+
+curl \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNjk3NDU4OTU5LCJleHAiOjE2OTc0NjYxNTl9.oWrFYutH3b2mR8obNPbFwuAhE7iD4ZUn-3BDuMEcuWs" \
+-X PUT http://34.234.92.182:8080/api/parking_sessions/18 -d '{"plate_number":"AGAIN123", "status":"COMPLETE"}'
